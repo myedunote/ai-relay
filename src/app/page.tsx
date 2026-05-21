@@ -78,8 +78,12 @@ curl https://airelay.izmw.me/v1/chat/completions \\
               <td style={{ padding: '0.5rem' }}>Chat Completions（流式/非流式）</td>
             </tr>
             <tr>
+              <td style={{ padding: '0.5rem', fontFamily: 'monospace' }}>GET /health</td>
+              <td style={{ padding: '0.5rem' }}>健康检查（公开）</td>
+            </tr>
+            <tr>
               <td style={{ padding: '0.5rem', fontFamily: 'monospace' }}>GET /api/status</td>
-              <td style={{ padding: '0.5rem' }}>服务状态（公开）</td>
+              <td style={{ padding: '0.5rem' }}>服务状态详情</td>
             </tr>
           </tbody>
         </table>
