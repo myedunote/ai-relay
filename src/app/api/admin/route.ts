@@ -36,8 +36,14 @@ export async function GET(request: NextRequest) {
   // Eagerly init all provider pools so stats reflect all configured providers
   initAllKeyPools(PROVIDERS);
   const providerStats = getKeyPoolStats();
-  const globalUsage = await usageStorage.getGlobalUsage();
-  const quota = await usageStorage.checkQuota();
+
+  // Fire all 4 KV queries in parallel instead of sequential awaits
+  const [globalUsage, quota, errorStats, keyErrors] = await Promise.all([
+    usageStorage.getGlobalUsage(),
+    usageStorage.checkQuota(),
+    usageStorage.getErrorStats(),
+    usageStorage.getKeyErrors(),
+  ]);
 
   const providers = Object.entries(PROVIDERS).map(([name, config]) => {
     const stats = providerStats[name];
@@ -50,10 +56,6 @@ export async function GET(request: NextRequest) {
       modelPrefixes: config.modelPrefixes,
     };
   });
-
-  // Fetch error stats
-  const errorStats = await usageStorage.getErrorStats();
-  const keyErrors = await usageStorage.getKeyErrors();
 
   // Build keyHash → provider mapping from key pool stats
   const keyHashToProvider: Record<string, string> = {};

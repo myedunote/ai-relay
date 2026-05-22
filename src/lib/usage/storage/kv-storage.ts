@@ -204,8 +204,15 @@ export class KVUsageStorage implements UsageStorage {
       const date = today();
       const result: Record<string, Record<string, number>> = {};
 
-      for (const provider of PROVIDER_NAMES) {
-        const raw = await kv.hgetall(`error:${provider}:${date}`);
+      // Fetch all provider error stats in parallel
+      const providerResults = await Promise.all(
+        PROVIDER_NAMES.map(async (provider) => {
+          const raw = await kv.hgetall(`error:${provider}:${date}`);
+          return { provider, raw };
+        })
+      );
+
+      for (const { provider, raw } of providerResults) {
         if (raw && Object.keys(raw).length > 0) {
           result[provider] = {};
           for (const [code, count] of Object.entries(raw)) {
@@ -238,12 +245,19 @@ export class KVUsageStorage implements UsageStorage {
 
       // Get all key hashes that had errors today from the SET
       const indexKey = `error:keys:${date}`;
-      const keyHashes = await kv.smembers(indexKey);
+      const keyHashes: string[] = await kv.smembers(indexKey);
       if (!keyHashes || keyHashes.length === 0) return [];
 
-      for (const keyHash of keyHashes) {
-        const redisKey = `error:key:${keyHash}:${date}`;
-        const raw = await kv.hgetall(redisKey);
+      // Fetch all key errors in parallel
+      const keyResults = await Promise.all(
+        keyHashes.map(async (keyHash: string) => {
+          const redisKey = `error:key:${keyHash}:${date}`;
+          const raw = await kv.hgetall(redisKey);
+          return { keyHash, raw };
+        })
+      );
+
+      for (const { keyHash, raw } of keyResults) {
         if (!raw) continue;
 
         const errors: Record<string, { count: number; reason: string }> = {};
@@ -307,10 +321,16 @@ export class KVUsageStorage implements UsageStorage {
       const date = today();
       const raw = await kv.hgetall(`usage:daily:${date}`);
 
-      // Fetch per-provider usage
+      // Fetch per-provider usage in parallel
+      const providerResults = await Promise.all(
+        PROVIDER_NAMES.map(async (provider) => {
+          const pRaw = await kv.hgetall(`usage:provider:${provider}:daily:${date}`);
+          return { provider, raw: pRaw };
+        })
+      );
+
       const providers: Record<string, { requests: number; tokens: number; promptTokens: number; completionTokens: number }> = {};
-      for (const provider of PROVIDER_NAMES) {
-        const pRaw = await kv.hgetall(`usage:provider:${provider}:daily:${date}`);
+      for (const { provider, raw: pRaw } of providerResults) {
         const req = Number(pRaw?.requests || 0);
         if (req > 0) {
           providers[provider] = {
