@@ -95,7 +95,7 @@ export const PROVIDERS: Record<string, ProviderConfig> = {
   xiaomi_sgp_coding: {
     name: 'xiaomi_sgp_coding',
     displayName: 'MiMo SGP (Coding Plan)',
-    baseUrl: 'https://coding-plan-sgp.xiaomimimo.com/v1',
+    baseUrl: 'https://token-plan-sgp.xiaomimimo.com/v1',
     modelPrefixes: ['mimo-v2.5-pro-sgp', 'mimo-v2.5-flash-sgp'],
     headerFormat: 'azure',
     envKeyField: 'XIAOMIMIMO_SGP_CODING_KEYS',
@@ -112,7 +112,7 @@ export const PROVIDERS: Record<string, ProviderConfig> = {
   xiaomi_coding: {
     name: 'xiaomi_coding',
     displayName: 'MiMo (Coding Plan)',
-    baseUrl: 'https://coding-plan-cn.xiaomimimo.com/v1',
+    baseUrl: 'https://token-plan-cn.xiaomimimo.com/v1',
     modelPrefixes: ['mimo-v2.5-pro-coding'],
     headerFormat: 'openai',
     envKeyField: 'XIAOMI_CODING_KEYS',

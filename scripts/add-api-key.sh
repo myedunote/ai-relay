@@ -37,9 +37,9 @@ declare -A TEST_URLS=(
   [openai]="https://api.openai.com/v1/chat/completions"
   [anthropic]="https://api.anthropic.com/v1/messages"
   [deepseek]="https://api.deepseek.com/v1/chat/completions"
-  [xiaomi_sgp_coding]="https://coding-plan-sgp.xiaomimimo.com/v1/chat/completions"
+  [xiaomi_sgp_coding]="https://token-plan-sgp.xiaomimimo.com/v1/chat/completions"
   [xiaomi]="https://api.xiaomimimo.com/v1/chat/completions"
-  [xiaomi_coding]="https://coding-plan-cn.xiaomimimo.com/v1/chat/completions"
+  [xiaomi_coding]="https://token-plan-cn.xiaomimimo.com/v1/chat/completions"
   [lpgpt]="https://lpgpt.us/v1/chat/completions"
 )
 
