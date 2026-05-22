@@ -201,7 +201,8 @@ const TRANSLATIONS = {
     alertAddFailed: '添加密钥失败',
     alertSaveFallbackFailed: '保存回退链失败',
     alertResetFallbackFailed: '重置回退链失败',
-    alertVerificationRequestFailed: '验证请求失败'
+    alertVerificationRequestFailed: '验证请求失败',
+    deployTime: '最近部署时间'
   },
   en: {
     // Login
@@ -357,7 +358,8 @@ const TRANSLATIONS = {
     alertAddFailed: 'Failed to add key',
     alertSaveFallbackFailed: 'Failed to save fallback chain',
     alertResetFallbackFailed: 'Failed to reset fallbacks',
-    alertVerificationRequestFailed: 'Verification request failed'
+    alertVerificationRequestFailed: 'Verification request failed',
+    deployTime: 'Last Deployed'
   }
 };
 
