@@ -311,15 +311,17 @@ export default function OverviewTab({
                   </tr>
                 </thead>
                 <tbody>
-                  {Object.entries(data.usage.providers).map(([name, stats]) => (
-                    <tr key={name} style={{ borderBottom: '1px solid rgba(255,255,255,0.04)' }}>
-                      <td style={{ padding: '0.75rem 0.5rem', fontWeight: 500, color: '#f3f4f6' }}>{name}</td>
-                      <td style={{ padding: '0.75rem 0.5rem', textAlign: 'right', color: '#d1d5db' }}>{fmtNum(stats.requests)}</td>
-                      <td style={{ padding: '0.75rem 0.5rem', textAlign: 'right', color: '#60a5fa' }}>{fmtTokens(stats.promptTokens)}</td>
-                      <td style={{ padding: '0.75rem 0.5rem', textAlign: 'right', color: '#34d399' }}>{fmtTokens(stats.completionTokens)}</td>
-                      <td style={{ padding: '0.75rem 0.5rem', textAlign: 'right', fontWeight: 600, color: '#fff' }}>{fmtTokens(stats.tokens)}</td>
-                    </tr>
-                  ))}
+                  {Object.entries(data.usage.providers)
+                    .sort((a, b) => b[1].tokens - a[1].tokens)
+                    .map(([name, stats]) => (
+                      <tr key={name} style={{ borderBottom: '1px solid rgba(255,255,255,0.04)' }}>
+                        <td style={{ padding: '0.75rem 0.5rem', fontWeight: 500, color: '#f3f4f6' }}>{name}</td>
+                        <td style={{ padding: '0.75rem 0.5rem', textAlign: 'right', color: '#d1d5db' }}>{fmtNum(stats.requests)}</td>
+                        <td style={{ padding: '0.75rem 0.5rem', textAlign: 'right', color: '#60a5fa' }}>{fmtTokens(stats.promptTokens)}</td>
+                        <td style={{ padding: '0.75rem 0.5rem', textAlign: 'right', color: '#34d399' }}>{fmtTokens(stats.completionTokens)}</td>
+                        <td style={{ padding: '0.75rem 0.5rem', textAlign: 'right', fontWeight: 600, color: '#fff' }}>{fmtTokens(stats.tokens)}</td>
+                      </tr>
+                    ))}
                 </tbody>
               </table>
             </div>

@@ -424,37 +424,42 @@ export default function TokenTrendChart({ apiKey, lang = 'zh' }: TokenTrendChart
               gap: '0.75rem',
               marginTop: '1rem',
             }}>
-              {data.providers.map((p) => {
-                const totalTokens = p.data.reduce((sum, d) => sum + d.totalTokens, 0);
-                const color = PROVIDER_COLORS[p.provider] || '#888';
-                return (
-                  <div
-                    key={p.provider}
-                    onClick={() => setSelectedProvider(p.provider)}
-                    style={{
-                      padding: '0.75rem',
-                      borderRadius: '8px',
-                      border: `1px solid ${color}33`,
-                      backgroundColor: `${color}11`,
-                      cursor: 'pointer',
-                      transition: 'border-color 0.2s',
-                    }}
-                    onMouseEnter={(e) => {
-                      (e.currentTarget as HTMLDivElement).style.borderColor = color;
-                    }}
-                    onMouseLeave={(e) => {
-                      (e.currentTarget as HTMLDivElement).style.borderColor = `${color}33`;
-                    }}
-                  >
-                    <div style={{ fontSize: '0.75rem', color: '#888', marginBottom: '0.25rem' }}>
-                      {PROVIDER_DISPLAY_NAMES[p.provider] || p.provider}
+              {[...data.providers]
+                .map((p) => ({
+                  ...p,
+                  totalTokens: p.data.reduce((sum, d) => sum + d.totalTokens, 0),
+                }))
+                .sort((a, b) => b.totalTokens - a.totalTokens)
+                .map((p) => {
+                  const color = PROVIDER_COLORS[p.provider] || '#888';
+                  return (
+                    <div
+                      key={p.provider}
+                      onClick={() => setSelectedProvider(p.provider)}
+                      style={{
+                        padding: '0.75rem',
+                        borderRadius: '8px',
+                        border: `1px solid ${color}33`,
+                        backgroundColor: `${color}11`,
+                        cursor: 'pointer',
+                        transition: 'border-color 0.2s',
+                      }}
+                      onMouseEnter={(e) => {
+                        (e.currentTarget as HTMLDivElement).style.borderColor = color;
+                      }}
+                      onMouseLeave={(e) => {
+                        (e.currentTarget as HTMLDivElement).style.borderColor = `${color}33`;
+                      }}
+                    >
+                      <div style={{ fontSize: '0.75rem', color: '#888', marginBottom: '0.25rem' }}>
+                        {PROVIDER_DISPLAY_NAMES[p.provider] || p.provider}
+                      </div>
+                      <div style={{ fontSize: '1.1rem', fontWeight: 'bold', color }}>
+                        {fmtTokens(p.totalTokens)}
+                      </div>
                     </div>
-                    <div style={{ fontSize: '1.1rem', fontWeight: 'bold', color }}>
-                      {fmtTokens(totalTokens)}
-                    </div>
-                  </div>
-                );
-              })}
+                  );
+                })}
             </div>
           )}
         </>
