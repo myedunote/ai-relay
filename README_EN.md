@@ -211,6 +211,7 @@ Generate time-limited keys from the Admin dashboard:
 | `CLAUDE_KEYS` | Anthropic API Keys | ⬜ |
 | `DEEPSEEK_KEYS` | DeepSeek API Keys | ⬜ |
 | `XIAOMI_KEYS` | Xiaomi API Keys | ⬜ |
+| `RELAY_KV_USAGE_SAMPLE_RATE` | Usage write sample rate; `1` is exact, `0.1` writes about 10% and scales values as estimates | ⬜ |
 
 > [!NOTE]
 > Provider keys are best configured via the Admin panel (stored in Upstash Redis), not as environment variables.

@@ -211,6 +211,7 @@ for chunk in stream:
 | `CLAUDE_KEYS` | Anthropic API Keys | ⬜ |
 | `DEEPSEEK_KEYS` | DeepSeek API Keys | ⬜ |
 | `XIAOMI_KEYS` | Xiaomi API Keys | ⬜ |
+| `RELAY_KV_USAGE_SAMPLE_RATE` | 用量统计写入采样率，`1` 为精确统计，`0.1` 表示约 10% 写入并按比例估算 | ⬜ |
 
 > [!NOTE]
 > Provider 密钥建议通过 Admin 后台配置（存储在 Upstash Redis 中），而非写入环境变量。
