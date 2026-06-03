@@ -335,6 +335,7 @@ curl -X POST https://你的项目.vercel.app/v1/messages \
 | `XIAOMIMIMO_SGP_CODING_KEYS` | MiMo SGP Coding Plan API Keys | ⬜ |
 | `XIAOMI_CODING_KEYS` | MiMo Coding Plan API Keys | ⬜ |
 | `RELAY_KV_USAGE_SAMPLE_RATE` | 用量统计写入采样率，`1` 为精确统计，`0.1` 表示约 10% 写入并按比例估算 | ⬜ |
+| `RELAY_API_KEY_MIN_LENGTH` | Admin 后台添加供应商 Key 时的最短字符数校验（默认 `20`，设为 `0` 可关闭限制） | ⬜ |
 
 > [!NOTE]
 > Provider 密钥建议通过 Admin 后台配置（存储在 Upstash Redis 中），而非写入环境变量。后台添加/测试密钥时支持粘贴原始 API Key 或 Base64 编码后的 Key，系统会在保存和测试前自动解码。

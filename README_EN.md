@@ -309,6 +309,7 @@ Generate time-limited keys from the Admin dashboard:
 | `XIAOMIMIMO_SGP_CODING_KEYS` | MiMo SGP Coding Plan API keys | ⬜ |
 | `XIAOMI_CODING_KEYS` | MiMo Coding Plan API keys | ⬜ |
 | `RELAY_KV_USAGE_SAMPLE_RATE` | Usage write sample rate; `1` is exact, `0.1` writes about 10% and scales values as estimates | ⬜ |
+| `RELAY_API_KEY_MIN_LENGTH` | Minimum character length for provider keys added via the Admin panel (default `20`; set to `0` to disable) | ⬜ |
 
 > [!NOTE]
 > Provider keys are best configured via the Admin panel (stored in Upstash Redis), not as environment variables. When adding or testing keys in Admin, both raw API keys and Base64-encoded keys are accepted and decoded automatically before saving or testing.
