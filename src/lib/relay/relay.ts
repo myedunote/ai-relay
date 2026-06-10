@@ -18,7 +18,6 @@ import {
 } from './rate-limiter';
 import { withConcurrency } from './concurrency';
 import { smartRoute, recordProviderResult, isSmartRoutingConfigured } from '../smart-routing';
-import { isCloudflareSync } from '../cf-env';
 
 // Module-level cached storage instance for error recording.
 // Falls back to KVUsageStorage synchronously on first call to avoid
